@@ -1,0 +1,7 @@
+package webSocketServer;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+public interface WebsocketServerInterface {
+	
+}	
