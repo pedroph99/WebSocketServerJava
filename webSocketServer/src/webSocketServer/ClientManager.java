@@ -21,4 +21,6 @@ public class ClientManager {
     public static Map<UUID, ClientConnection> getClients() {
         return clients;
     }
+    public static ClientConnection getClient(UUID id) {
+        return clients.get(id);}
 }

@@ -54,8 +54,8 @@ public class WebsocketServer implements WebsocketServerInterface {
 	                            if (message == null) break; // conexão fechada
 	                            System.out.println("📩 [" + client.getInetAddress() + "] " + message);
 
-	                            // Ecoa de volta a mensagem
-	                            WebSocketUtils.sendMessage(out, "Servidor recebeu: " + message);
+	                           
+	                            ResponseHandler.handler(message, this.listaClientes);
 	                        }
 
 	                    } catch (IOException e) {
