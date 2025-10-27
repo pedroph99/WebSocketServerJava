@@ -24,7 +24,7 @@ jobs:
     - name: Compilar código
       run: |
         mkdir -p out
-        javac -cp "lib/*" -d out $(find src -name "*.java")
+        javac -cp "lib/*" -d out $(find webSocketServer/src -name "*.java")
 
     - name: Executar programa
       run: |
