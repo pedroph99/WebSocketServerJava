@@ -1,11 +1,9 @@
 package webSocketServer;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-
 
 public class WebSocketUtils {
     public static void sendMessage(OutputStream out, String message) throws IOException {
