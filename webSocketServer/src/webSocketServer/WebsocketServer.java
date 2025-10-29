@@ -11,6 +11,7 @@ import java.net.ServerSocket; // cria o servidor TCP (porta de escuta)
 import java.net.Socket;       // representa uma conexão com um cliente
 import java.security.MessageDigest;
 import java.util.Base64;
+import java.util.UUID;
 /**
  * 
  * 
@@ -44,7 +45,7 @@ public class WebsocketServer implements WebsocketServerInterface {
 	            // Cria uma nova thread para esse cliente
 	            new Thread(() -> {
 	                try {
-	                    this.handleHandshake(client);
+	                    UUID uuidCurrentClient = this.handleHandshake(client);
 	                    try {
 	                        InputStream in = client.getInputStream();
 	                        OutputStream out = client.getOutputStream();
@@ -55,7 +56,7 @@ public class WebsocketServer implements WebsocketServerInterface {
 	                            System.out.println("📩 [" + client.getInetAddress() + "] " + message);
 
 	                           
-	                            ResponseHandler.handler(message, this.listaClientes);
+	                            ResponseHandler.handler(message, this.listaClientes, uuidCurrentClient );
 	                        }
 
 	                    } catch (IOException e) {
@@ -68,6 +69,7 @@ public class WebsocketServer implements WebsocketServerInterface {
 	            
 			}
 		} catch (IOException e) {
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
@@ -91,7 +93,7 @@ public class WebsocketServer implements WebsocketServerInterface {
 		return serverInfos;
 }
 	
-	private void handleHandshake(Socket client) {
+	private UUID handleHandshake(Socket client) {
         try {
             InputStream in = client.getInputStream();
             OutputStream out = client.getOutputStream();
@@ -111,7 +113,7 @@ public class WebsocketServer implements WebsocketServerInterface {
             if (webSocketKey == null) {
                 System.out.println("⚠️ Cabeçalho Sec-WebSocket-Key não encontrado.");
                 client.close();
-                return;
+                return null;
             }
 
             // 2️⃣ Gera o valor do cabeçalho Sec-WebSocket-Accept
@@ -141,11 +143,12 @@ public class WebsocketServer implements WebsocketServerInterface {
 
             // (Opcional) envie uma mensagem de boas-vindas com o ID
             WebSocketUtils.sendMessage(out, "Conexão aceita! Seu ID é: " + connection.getId());
-
+            return connection.getId();
             // A partir daqui, pode começar a ler frames do cliente (loop de mensagens)
         } catch (Exception e) {
             System.out.println("Erro no handshake: " + e.getMessage());
         }
+		return null;
     }
 
     // 🔐 Método que gera o Sec-WebSocket-Accept
