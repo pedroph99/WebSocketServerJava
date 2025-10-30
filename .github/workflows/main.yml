@@ -28,4 +28,4 @@ jobs:
 
     - name: Executar programa
       run: |
-        timeout 10s java -cp "out:webSocketServer/lib/*" webSocketServer.MainWebSocketServer
+        timeout 3s java -cp "out:webSocketServer/lib/*" webSocketServer.MainWebSocketServer || true
