@@ -1,0 +1,107 @@
+/* === Layout geral === */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 700px;
+}
+
+h1 {
+    text-align: center;
+    color: #00aaff;
+    margin-bottom: 15px;
+}
+
+#status {
+    background-color: #2d2d2d;
+    border-left: 4px solid #00aaff;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+/* === Área de mensagens === */
+#log {
+    border: 1px solid #444;
+    background-color: #252526;
+    border-radius: 8px;
+    padding: 10px;
+    height: 320px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#log p {
+    margin: 6px 0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+/* Mensagens do sistema */
+#log p.system-msg {
+    align-self: center;
+    color: #aaa;
+    font-style: italic;
+    background: none;
+}
+
+/* Mensagens enviadas (você) */
+#log p.sent {
+    background-color: #0078d7;
+    color: white;
+    align-self: flex-end;
+}
+
+/* Mensagens recebidas */
+#log p.received {
+    background-color: #3a3d41;
+    color: #f0f0f0;
+    align-self: flex-start;
+}
+
+/* === Formulário de envio === */
+.message-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #2d2d2d;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+input[type="text"],
+textarea {
+    background-color: #3a3d41;
+    border: 1px solid #555;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    outline: none;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #00aaff;
+}
+
+button {
+    background-color: #0078d7;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #0062b3;
+}

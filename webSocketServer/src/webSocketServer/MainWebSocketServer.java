@@ -6,7 +6,7 @@ public class MainWebSocketServer {
 
 	public static void main(String[] args)  {
 		// TODO Auto-generated method stub
-		WebsocketServer server = new WebsocketServer("127.0.0.1", 8081);
+		WebsocketServer server = new WebsocketServer("0.0.0.0", 8081);
 		try {
 			server.startServer();
 		} catch (IOException e) {
