@@ -44,8 +44,15 @@ public class WebsocketServer implements WebsocketServerInterface {
 
 	            // Cria uma nova thread para esse cliente
 	            new Thread(() -> {
+	                UUID uuidCurrentClient = null; // Armazenar o ID do cliente
 	                try {
-	                    UUID uuidCurrentClient = this.handleHandshake(client);
+	                    uuidCurrentClient = this.handleHandshake(client);
+                        
+                        if (uuidCurrentClient == null) {
+                            // Handshake falhou ou cliente fechou conexão prematuramente
+                            return; 
+                        }
+                        
 	                    try {
 	                        InputStream in = client.getInputStream();
 	                        OutputStream out = client.getOutputStream();
@@ -58,12 +65,29 @@ public class WebsocketServer implements WebsocketServerInterface {
 	                           
 	                            ResponseHandler.handler(message, this.listaClientes, uuidCurrentClient );
 	                        }
+                            
+                            // Desconexão de um usuário
+                            System.out.println("Cliente desconectado normalmente: " + client.getInetAddress());
 
 	                    } catch (IOException e) {
-	                        System.out.println("Erro lendo mensagens: " + e.getMessage());
-	                    }
+	                        System.out.println("Erro lendo mensagens ou desconexão forçada: " + e.getMessage());
+	                    } finally {
+                             // Garante a remoção do cliente, e atualiza a lista de usuários
+                             if (uuidCurrentClient != null) {
+                                ClientManager.removeClient(uuidCurrentClient);
+                                // Broadcast para que o cliente.js de todos os outros clientes atualize a lista
+                                ClientManager.broadcastUserList();
+                             }
+                            try {
+                                client.close(); // Fecha o socket
+                            } catch (IOException e) {
+                                // Ignora, pois estamos fechando o socket
+                            }
+                        }
+                        
 	                } catch (Exception e) {
 	                    System.out.println("Erro na conexão: " + e.getMessage());
+                         // Se o erro ocorrer antes de obter o UUID, não há nada para remover.
 	                }
 	            }).start();
 	            
@@ -103,7 +127,10 @@ public class WebsocketServer implements WebsocketServerInterface {
             String webSocketKey = null;
 
             // 1️⃣ Lê os cabeçalhos HTTP até a linha em branco
-            while (!(line = reader.readLine()).isEmpty()) {
+            while (true) {
+                line = reader.readLine();
+                if (line == null || line.isEmpty()) break;
+                
                 System.out.println("Header: " + line);
                 if (line.startsWith("Sec-WebSocket-Key:")) {
                     webSocketKey = line.substring("Sec-WebSocket-Key:".length()).trim();
@@ -111,7 +138,7 @@ public class WebsocketServer implements WebsocketServerInterface {
             }
 
             if (webSocketKey == null) {
-                System.out.println("⚠️ Cabeçalho Sec-WebSocket-Key não encontrado.");
+                System.out.println("⚠️ Cabeçalho Sec-WebSocket-Key não encontrado ou conexão fechada prematuramente.");
                 client.close();
                 return null;
             }
@@ -147,6 +174,11 @@ public class WebsocketServer implements WebsocketServerInterface {
             // A partir daqui, pode começar a ler frames do cliente (loop de mensagens)
         } catch (Exception e) {
             System.out.println("Erro no handshake: " + e.getMessage());
+            try {
+                client.close(); // Garante que o socket é fechado em caso de falha no handshake
+            } catch (IOException ioException) {
+                // Ignora
+            }
         }
 		return null;
     }

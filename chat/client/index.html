@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cliente WebSocket Chat</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <h1>💬 Cliente Chat WebSocket (Java)</h1>
+
+    <div id="status">Status: Desconectado</div>
+    
+    <div class="user-section">
+        <h2>Usuários online (Clique para desafiar ou conversar)</h2>
+        <div id="myUsernameDisplay"></div> 
+        <div id="userList" class="user-list"></div>
+    </div>
+
+    <div id="gameContainer" style="display: none;">
+        <h2>Jogando com: <span id="opponentName"></span> (<span id="myMark"></span>)</h2>
+        <div id="gameStatus"></div>
+        <div id="ticTacToeBoard" class="tic-tac-toe-board">
+            </div>
+        <button id="closeGameBtn" onclick="closeGameUI()">Voltar ao Chat</button>
+    </div>
+    <div id="log"></div>
+
+    <div class="message-form">
+        <label for="recipientUsername">Destinatário:</label>
+        <input type="text" id="recipientUsername" placeholder="Selecione um usuário acima">
+
+        <label for="messageContent">Mensagem:</label>
+        <textarea id="messageContent" rows="3" placeholder="Digite sua mensagem"></textarea>
+
+        <button onclick="sendMessage()">Enviar mensagem</button>
+        <button id="challengeBtn" onclick="sendChallenge()">Desafiar Destinatário Atual</button>
+    </div>
+
+    <script src="clientChat.js"></script>
+    <script src="clientGame.js"></script>
+</body>
+</html>

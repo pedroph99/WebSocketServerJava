@@ -1,6 +1,6 @@
 //Configuração de conexão
 const SERVER_IP = window.location.hostname;
-const SERVER_PORT = 8081;
+const SERVER_PORT = 8082;
 const SOCKET_URL = `ws://${SERVER_IP}:${SERVER_PORT}`;
 
 let ws;
@@ -18,6 +18,23 @@ function appendToLog(message, isSystem = false) {
 
 function updateStatus(text) {
     document.getElementById('status').innerText = `Status: ${text}`;
+}
+
+// Atualiza a lista de usuários
+function updateUserList(users) {
+    const listDiv = document.getElementById("userList");
+    listDiv.innerHTML = "";
+
+    users.forEach(username => {
+        if (username === myUsername) return; // não mostra o próprio nome
+        const btn = document.createElement("button");
+        btn.textContent = username;
+        btn.className = "user-btn";
+        btn.onclick = () => {
+            document.getElementById("recipientUsername").value = username;
+        };
+        listDiv.appendChild(btn);
+    });
 }
 
 //Conexão WebSocket
@@ -40,7 +57,41 @@ function connect() {
     };
 
     ws.onmessage = (event) => {
-        appendToLog(event.data);
+        let handled = false;
+        let data;
+        
+        try {
+            data = JSON.parse(event.data);
+            
+            // 1. Delegar mensagens de Jogo ao clientGame.js
+            // Usamos window.handleGameMessages para garantir o acesso global
+            if (typeof window.handleGameMessages === 'function') {
+                handled = window.handleGameMessages(data);
+            }
+            
+            // 2. Handler de Lista de Usuários (Se não foi tratada pelo jogo)
+            if (!handled && data.type === "userList") {
+                updateUserList(data.users);
+                handled = true;
+            }
+            
+            // 3. Se não foi tratada, é uma mensagem JSON que deve ser logada
+            if (!handled) {
+                // Loga como uma mensagem de chat normal (ex: DM)
+                appendToLog(event.data);
+            }
+            
+            
+        } catch (e) {
+            // Não conseguiu fazer JSON.parse (é uma mensagem de chat comum ou de erro)
+            appendToLog(event.data);
+            
+            // ⚠️ Verifique o console do navegador! Se este 'catch' for acionado por um erro 
+            // no processamento do JSON do jogo, a mensagem de erro será registrada aqui.
+            if (event.data.includes("challenge")) {
+                 console.error("ERRO CRÍTICO ao delegar mensagem de desafio. Verifique o escopo de handleGameMessages:", e);
+            }
+        }
     };
 
     ws.onerror = (error) => {
@@ -67,7 +118,7 @@ function sendMessage() {
     }
 
     if (!recipient || !content) {
-        alert("Preencha o destinatário e a mensagem.");
+        alert("Selecione um destinatário e escreva algo.");
         return;
     }
 
