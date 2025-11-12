@@ -25,6 +25,14 @@
     </div>
     <div id="log"></div>
 
+    <div id="quizContainer" style="display: none;">
+        <h2>🧠 Quiz Global</h2>
+        <div id="quizQuestion"></div>
+        <div id="quizOptions" class="quiz-options"></div>
+        <div id="quizFeedback"></div>
+        <div id="quizRanking"></div>
+    </div>
+
     <div class="message-form">
         <label for="recipientUsername">Destinatário:</label>
         <input type="text" id="recipientUsername" placeholder="Selecione um usuário acima">
@@ -34,9 +42,13 @@
 
         <button onclick="sendMessage()">Enviar mensagem</button>
         <button id="challengeBtn" onclick="sendChallenge()">Desafiar Destinatário Atual</button>
+
+        <button onclick="inviteGlobalQuiz()">⚡ Convidar para Quiz</button>
+        <button onclick="startGlobalQuizNow()">▶️ Iniciar Quiz</button>
     </div>
 
     <script src="clientChat.js"></script>
     <script src="clientGame.js"></script>
+    <script src="clientQuiz.js"></script>
 </body>
 </html>

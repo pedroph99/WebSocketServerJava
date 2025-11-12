@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "textoPergunta": "Qual é a capital do Brasil?",
+    "opcao1": "Rio de Janeiro",
+    "opcao2": "São Paulo",
+    "opcao3": "Brasília",
+    "opcao4": "Belo Horizonte",
+    "indiceRespostaCorreta": 2
+  },
+  {
+    "id": "2",
+    "textoPergunta": "Quanto é 9 x 7?",
+    "opcao1": "56",
+    "opcao2": "63",
+    "opcao3": "72",
+    "opcao4": "69",
+    "indiceRespostaCorreta": 1
+  },
+  {
+    "id": "3",
+    "textoPergunta": "Quem pintou a Mona Lisa?",
+    "opcao1": "Michelangelo",
+    "opcao2": "Leonardo da Vinci",
+    "opcao3": "Raphael",
+    "opcao4": "Donatello",
+    "indiceRespostaCorreta": 1
+  }
+]

@@ -80,7 +80,10 @@ function connect() {
                 // Loga como uma mensagem de chat normal (ex: DM)
                 appendToLog(event.data);
             }
-            
+
+            if (!handled && typeof window.handleQuizMessages === 'function') {
+                handled = window.handleQuizMessages(data);
+            }
             
         } catch (e) {
             // Não conseguiu fazer JSON.parse (é uma mensagem de chat comum ou de erro)
