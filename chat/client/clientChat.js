@@ -1,6 +1,6 @@
 //Configuração de conexão
 const SERVER_IP = window.location.hostname;
-const SERVER_PORT = 8082;
+const SERVER_PORT = 8081;
 const SOCKET_URL = `ws://${SERVER_IP}:${SERVER_PORT}`;
 
 let ws;
