@@ -1,29 +1,65 @@
 [
   {
     "id": "1",
-    "textoPergunta": "Qual é a capital do Brasil?",
-    "opcao1": "Rio de Janeiro",
-    "opcao2": "São Paulo",
-    "opcao3": "Brasília",
-    "opcao4": "Belo Horizonte",
-    "indiceRespostaCorreta": 2
+    "textoPergunta": "A independência das colônias espanholas na América Latina no século XIX foi fortemente influenciada pelas ideias de qual movimento intelectual?",
+    "opcao1": "Mercantilismo",
+    "opcao2": "Iluminismo",
+    "opcao3": "Expressionismo",
+    "opcao4": "Romantismo",
+    "indiceRespostaCorreta": 1
   },
   {
     "id": "2",
-    "textoPergunta": "Quanto é 9 x 7?",
-    "opcao1": "56",
-    "opcao2": "63",
-    "opcao3": "72",
-    "opcao4": "69",
-    "indiceRespostaCorreta": 1
+    "textoPergunta": "A Guerra do Peloponeso envolveu principalmente quais cidades-estado da Grécia Antiga?",
+    "opcao1": "Esparta e Atenas",
+    "opcao2": "Corinto e Tebas",
+    "opcao3": "Atenas e Olímpia",
+    "opcao4": "Creta e Mileto",
+    "indiceRespostaCorreta": 0
   },
   {
     "id": "3",
-    "textoPergunta": "Quem pintou a Mona Lisa?",
-    "opcao1": "Michelangelo",
-    "opcao2": "Leonardo da Vinci",
-    "opcao3": "Raphael",
-    "opcao4": "Donatello",
-    "indiceRespostaCorreta": 1
+    "textoPergunta": "O Tratado de Tordesilhas dividiu o território recém-descoberto entre Portugal e Espanha em qual ano?",
+    "opcao1": "1492",
+    "opcao2": "1500",
+    "opcao3": "1494",
+    "opcao4": "1511",
+    "indiceRespostaCorreta": 2
+  },
+  {
+    "id": "4",
+    "textoPergunta": "Qual desses países NÃO faz fronteira com o Mar Cáspio?",
+    "opcao1": "Azerbaijão",
+    "opcao2": "Irã",
+    "opcao3": "Geórgia",
+    "opcao4": "Cazaquistão",
+    "indiceRespostaCorreta": 2
+  },
+  {
+    "id": "5",
+    "textoPergunta": "A Rota da Seda conectava principalmente o Império Romano a qual grande império asiático?",
+    "opcao1": "Império Mongol",
+    "opcao2": "Império Persa Sassânida",
+    "opcao3": "Dinastias Imperiais Chinesas",
+    "opcao4": "Império Otomano",
+    "indiceRespostaCorreta": 2
+  },
+  {
+    "id": "6",
+    "textoPergunta": "Qual é o nome do processo geológico responsável pelo movimento das placas tectônicas?",
+    "opcao1": "Convecção do manto",
+    "opcao2": "Erosão continental",
+    "opcao3": "Sedimentação oceânica",
+    "opcao4": "Deriva polar",
+    "indiceRespostaCorreta": 0
+  },
+  {
+    "id": "7",
+    "textoPergunta": "A Crise dos Mísseis de 1962 ocorreu quando a União Soviética instalou mísseis nucleares em qual país?",
+    "opcao1": "Venezuela",
+    "opcao2": "Cuba",
+    "opcao3": "Alemanha Oriental",
+    "opcao4": "Egito",
+       "indiceRespostaCorreta": 1
   }
 ]

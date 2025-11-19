@@ -89,8 +89,7 @@ function connect() {
             // Não conseguiu fazer JSON.parse (é uma mensagem de chat comum ou de erro)
             appendToLog(event.data);
             
-            // ⚠️ Verifique o console do navegador! Se este 'catch' for acionado por um erro 
-            // no processamento do JSON do jogo, a mensagem de erro será registrada aqui.
+
             if (event.data.includes("challenge")) {
                  console.error("ERRO CRÍTICO ao delegar mensagem de desafio. Verifique o escopo de handleGameMessages:", e);
             }
